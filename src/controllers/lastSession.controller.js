@@ -1,4 +1,4 @@
-import { lastSessionService } from "../DAO/mongo/services/lastsession.service.js";
+import { lastSessionService } from "../DAO/mongo/services/lastSession.service.js";
 import CustomError from "../DAO/mongo/services/errors/custom-error.js";
 import EErros from "../DAO/mongo/services/errors/enum.js";
 
