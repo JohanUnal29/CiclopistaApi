@@ -1,6 +1,6 @@
 import passport from "passport";
 import express from "express";
-import { lastSessionService } from "../DAO/mongo/services/lastsession.service.js";
+import { lastSessionService } from "../DAO/mongo/services/lastSession.service.js";
 export const sessionGoogleRouter = express.Router();
 
 sessionGoogleRouter.get("/error-auth", (req, res) => {
