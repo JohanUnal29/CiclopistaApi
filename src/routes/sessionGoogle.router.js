@@ -104,7 +104,7 @@ sessionGoogleRouter.get("/logout", async (req, res) => {
       if (err) {
         return res.send({ status: "Error", error: "No se pudo cerrar" });
       }
-      return res.redirect("http://localhost:3000/");
+      return res.redirect("https://ciclopista.onrender.com");
     });
   } catch (error) {
     console.error("Error:", error);
