@@ -20,7 +20,7 @@ export function iniPassport() {
           "797905124061-gp2j2h6jlq8hkvpc4c61tflgtgt880bg.apps.googleusercontent.com",
         clientSecret: "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",
         callbackURL:
-          "https://ciclopista.onrender.com/api/sessionsGoogle/auth/google/callback",
+          "https://ciclopistaapi.onrender.com/api/sessionsGoogle/auth/google/callback",
       },
       async (accessToken, _, profile, done) => {
         console.log(profile);
