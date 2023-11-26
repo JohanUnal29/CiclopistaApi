@@ -63,6 +63,9 @@ sessionGoogleRouter.get("/user", async (req, res) => {
 
     await lastSessionService.addLastSession(user2);
 
+    // Configura el encabezado CORS
+    res.header('Access-Control-Allow-Credentials', 'true');
+
     return res.send({
       status: "success",
       message: "sesión cerrada",
@@ -75,6 +78,7 @@ sessionGoogleRouter.get("/user", async (req, res) => {
       .send({ status: "Error", error: "Internal Server Error" });
   }
 });
+
 
 sessionGoogleRouter.get("/logout", async (req, res) => {
   try {
