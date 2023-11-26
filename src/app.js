@@ -79,8 +79,10 @@ app.use(session({
     httpOnly: true,
     secure: true,
     sameSite: 'None',
+    domain: 'https://ciclopista.onrender.com/', // ajusta el dominio según tus necesidades
   },
 }));
+
 
 
 iniPassport();
