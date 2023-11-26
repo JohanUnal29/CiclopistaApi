@@ -63,7 +63,7 @@ sessionGoogleRouter.get("/user", async (req, res) => {
 
     await lastSessionService.addLastSession(user2);
 
-    // Configura el encabezado CORS
+    // Configura el encabezado CORS //
     res.header('Access-Control-Allow-Credentials', 'true');
 
     return res.send({
