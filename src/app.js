@@ -28,14 +28,22 @@ import cookieSession from "cookie-session";
 const app = express();
 app.use(addLogger);
 const port = entorno.PORT;
-app.use(cors({
-  origin: ["http://localhost:3000", "https://ciclopista.onrender.com"],
-  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-  credentials: true,
-  optionsSuccessStatus: 204,
-  allowedHeaders: "Content-Type,Authorization",
-  exposedHeaders: "Access-Control-Allow-Origin,Access-Control-Allow-Credentials",
-}));
+
+app.use(
+  cors({
+    origin: ["http://localhost:3000", "https://ciclopista.onrender.com"],
+    methods: "GET,POST,PUT,DELETE",
+    credentials: true,
+  })
+);
+// app.use(cors({
+//   origin: ["http://localhost:3000", "https://ciclopista.onrender.com"],
+//   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+//   credentials: true,
+//   optionsSuccessStatus: 204,
+//   allowedHeaders: "Content-Type,Authorization",
+//   exposedHeaders: "Access-Control-Allow-Origin,Access-Control-Allow-Credentials",
+// }));
 
 
 
