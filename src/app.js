@@ -27,9 +27,12 @@ const app = express();
 app.use(addLogger);
 const port = entorno.PORT;
 app.use(cors({
-  origin: ["http://localhost:3000", "https://ciclopista.onrender.com"]
-})
-);
+  origin: ["http://localhost:3000", "https://ciclopista.onrender.com"],
+  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+  credentials: true,
+  optionsSuccessStatus: 204,
+  allowedHeaders: "Content-Type,Authorization",
+}));
 
 
 const swaggerOptions = {
