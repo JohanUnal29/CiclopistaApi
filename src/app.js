@@ -23,6 +23,8 @@ import lastSessionRouter from "./routes/lastSession.router.js";
 import userManagerRouter from "./routes/userManager.router.js";
 import userProfileRouter from "./routes/userProfile.router.js";
 
+import cookieSession from "cookie-session";
+
 const app = express();
 app.use(addLogger);
 const port = entorno.PORT;
@@ -71,19 +73,23 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 
 
+// app.use(
+//   session({
+//     store: MongoStore.create({ mongoUrl: entorno.MONGO_URL, ttl: 86400 * 7 }),
+//     secret: 'un-re-secreto',
+//     resave: true,
+//     saveUninitialized: true,
+//     cookie: {
+//       httpOnly: true,
+//       maxAge: 7 * 24 * 60 * 60 * 1000,
+//       sameSite: 'none', // o 'lax' según tus necesidades
+//       secure: true, // Si estás utilizando HTTPS
+//     },
+//   })
+// );
+
 app.use(
-  session({
-    store: MongoStore.create({ mongoUrl: entorno.MONGO_URL, ttl: 86400 * 7 }),
-    secret: 'un-re-secreto',
-    resave: true,
-    saveUninitialized: true,
-    cookie: {
-      httpOnly: true,
-      maxAge: 7 * 24 * 60 * 60 * 1000,
-      sameSite: 'none', // o 'lax' según tus necesidades
-      secure: true, // Si estás utilizando HTTPS
-    },
-  })
+  cookieSession({ name: "session", keys: ["lama"], maxAge: 24 * 60 * 60 * 100 })
 );
 
 iniPassport();
