@@ -30,7 +30,9 @@ app.use(addLogger);
 const port = entorno.PORT;
 
 app.use(cors({
-  origin: ["http://localhost:3000", "https://ciclopista.onrender.com"]
+  origin: ["http://localhost:3000", "https://ciclopista.onrender.com"],
+  methods: "GET,POST,PUT,DELETE",
+  credentials: true,
 })
 );
 
@@ -77,6 +79,10 @@ app.use(
     resave: true,
     saveUninitialized: true,
   })
+);
+
+app.use(
+  cookieSession({ name: "session", keys: ["lama"], maxAge: 24 * 60 * 60 * 100 })
 );
 
 iniPassport();
