@@ -77,6 +77,12 @@ app.use(
     secret: 'un-re-secreto',
     resave: true,
     saveUninitialized: true,
+    cookie: {
+      httpOnly: true,
+      maxAge: 7 * 24 * 60 * 60 * 1000,
+      sameSite: 'none', // o 'lax' según tus necesidades
+      secure: true, // Si estás utilizando HTTPS
+    },
   })
 );
 
