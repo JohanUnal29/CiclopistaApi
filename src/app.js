@@ -27,12 +27,9 @@ const app = express();
 app.use(addLogger);
 const port = entorno.PORT;
 app.use(cors({
-  origin: ["http://localhost:3000", "https://ciclopista.onrender.com"],
-  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-  credentials: true,
-  optionsSuccessStatus: 204,
-  allowedHeaders: "Content-Type,Authorization",
-}));
+  origin: ["http://localhost:3000", "https://ciclopista.onrender.com"]
+})
+);
 
 
 const swaggerOptions = {
@@ -70,20 +67,14 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 
 
-app.use(session({
-  store: MongoStore.create({ mongoUrl: entorno.MONGO_URL, ttl: 86400 * 7 }),
-  secret: 'un-re-secreto',
-  resave: true,
-  saveUninitialized: true,
-  cookie: {
-    httpOnly: true,
-    secure: true,
-    sameSite: 'None',
-    domain: 'https://ciclopista.onrender.com/', // ajusta el dominio según tus necesidades
-  },
-}));
-
-
+app.use(
+  session({
+    store: MongoStore.create({ mongoUrl: entorno.MONGO_URL, ttl: 86400 * 7 }),
+    secret: 'un-re-secreto',
+    resave: true,
+    saveUninitialized: true,
+  })
+);
 
 iniPassport();
 app.use(passport.initialize());
