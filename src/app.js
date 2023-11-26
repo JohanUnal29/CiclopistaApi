@@ -29,23 +29,10 @@ const app = express();
 app.use(addLogger);
 const port = entorno.PORT;
 
-app.use(
-  cors({
-    origin: ["http://localhost:3000", "https://ciclopista.onrender.com"],
-    methods: "GET,POST,PUT,DELETE",
-    credentials: true,
-  })
+app.use(cors({
+  origin: ["http://localhost:3000", "https://ciclopista.onrender.com"]
+})
 );
-// app.use(cors({
-//   origin: ["http://localhost:3000", "https://ciclopista.onrender.com"],
-//   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-//   credentials: true,
-//   optionsSuccessStatus: 204,
-//   allowedHeaders: "Content-Type,Authorization",
-//   exposedHeaders: "Access-Control-Allow-Origin,Access-Control-Allow-Credentials",
-// }));
-
-
 
 
 const swaggerOptions = {
@@ -83,23 +70,13 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 
 
-// app.use(
-//   session({
-//     store: MongoStore.create({ mongoUrl: entorno.MONGO_URL, ttl: 86400 * 7 }),
-//     secret: 'un-re-secreto',
-//     resave: true,
-//     saveUninitialized: true,
-//     cookie: {
-//       httpOnly: true,
-//       maxAge: 7 * 24 * 60 * 60 * 1000,
-//       sameSite: 'none', // o 'lax' según tus necesidades
-//       secure: true, // Si estás utilizando HTTPS
-//     },
-//   })
-// );
-
 app.use(
-  cookieSession({ name: "session", keys: ["lama"], maxAge: 24 * 60 * 60 * 100 })
+  session({
+    store: MongoStore.create({ mongoUrl: entorno.MONGO_URL, ttl: 86400 * 7 }),
+    secret: 'un-re-secreto',
+    resave: true,
+    saveUninitialized: true,
+  })
 );
 
 iniPassport();
