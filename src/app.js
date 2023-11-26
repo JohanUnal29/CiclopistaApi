@@ -70,14 +70,18 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 
 
-app.use(
-  session({
-    store: MongoStore.create({ mongoUrl: entorno.MONGO_URL, ttl: 86400 * 7 }),
-    secret: 'un-re-secreto',
-    resave: true,
-    saveUninitialized: true,
-  })
-);
+app.use(session({
+  store: MongoStore.create({ mongoUrl: entorno.MONGO_URL, ttl: 86400 * 7 }),
+  secret: 'un-re-secreto',
+  resave: true,
+  saveUninitialized: true,
+  cookie: {
+    httpOnly: true,
+    secure: true,
+    sameSite: 'None',
+  },
+}));
+
 
 iniPassport();
 app.use(passport.initialize());
