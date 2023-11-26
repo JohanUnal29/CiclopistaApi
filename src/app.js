@@ -31,8 +31,7 @@ const port = entorno.PORT;
 
 app.use(cors({
   origin: ["http://localhost:3000", "https://ciclopista.onrender.com"],
-  methods: "GET,POST,PUT,DELETE",
-  credentials: true,
+  
 })
 );
 
