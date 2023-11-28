@@ -27,39 +27,46 @@ class UserProfileController {
     }
   };
 
-  getImageByEmail = async (req,res) => {
-    try {
-      const email = req.params.email;
-      const profileImage = await userProfileService.getImageByEmail(email);
+  getImageByEmail = async (req, res) => {
+  try {
+    const email = req.params.email;
+    const profileImage = await userProfileService.getImageByEmail(email);
 
-      if (!profileImage) {
-        return res.status(400).send({
-          status: "error",
-          error: "The image is not yet available",
-          cause: "The image is not yet available",
-        });
-      }
+    if (!profileImage) {
+      return res.status(400).send({
+        status: "error",
+        error: "The image is not yet available",
+        cause: "The image is not yet available",
+      });
+    }
 
-      return res.send({
-        status: "Success",
-        message: "profileImage found",
-        payload: profileImage,
-      });
-    } catch (error) {
-      CustomError.createError({
-        name: "Error-profileImage-by-email",
-        cause: "An error occurred while fetching profileImage by email",
-        message: "An error occurred while fetching profileImage by email",
-        code: EErros.DATABASES_READ_ERROR,
-      });
-      req.logger.error({
-        message: "profileImage was not found by email",
-        cause: error,
-        Date: new Date().toLocaleTimeString(),
-        stack: JSON.stringify(error.stack, null, 2),
-      });
-    } 
+    return res.send({
+      status: "Success",
+      message: "profileImage found",
+      payload: profileImage,
+    });
+  } catch (error) {
+    // Crear y lanzar el error aquí para que se propague
+    const customError = CustomError.createError({
+      name: "Error-profileImage-by-email",
+      cause: "An error occurred while fetching profileImage by email",
+      message: "An error occurred while fetching profileImage by email",
+      code: EErros.DATABASES_READ_ERROR,
+    });
+
+    // Registrar el error
+    req.logger.error({
+      message: "profileImage was not found by email",
+      cause: error,
+      Date: new Date().toLocaleTimeString(),
+      stack: JSON.stringify(error.stack, null, 2),
+    });
+
+    // Lanzar el error para que se propague al middleware de manejo de errores
+    throw customError;
   }
+};
+
 
 }
 
